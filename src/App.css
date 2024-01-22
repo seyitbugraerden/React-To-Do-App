@@ -20,6 +20,7 @@
   color: white;
   padding: 5px 10px;
   cursor: pointer;
+  border: 0px !important;
 }
 .list-area input{margin: 0px;background-color: transparent;border: 1px solid #855AFD;outline: 0px;padding: .5em 10px;width: 80%;color: white;text-transform: capitalize;}
 
