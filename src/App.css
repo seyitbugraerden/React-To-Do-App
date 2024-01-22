@@ -36,5 +36,5 @@
 .editTask{border-bottom: 2px solid #1C1A42 !important;padding-left: 0px !important;margin-left: 10px !important;text-transform: capitalize;}
 
 @media(max-width:576px){
-  .list-area{max-width: 350px;}
+  .list-area{margin: 0px 15px;}
 }
