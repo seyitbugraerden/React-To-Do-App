@@ -9,13 +9,16 @@ function App() {
 
   useEffect(() => {
     axios.get('https://to-do-project-46be6-default-rtdb.firebaseio.com/task.json')
-        .then(response => {
-            const tasksArray = Object.values(response.data);
-            setTasks(tasksArray.map(task => task.newTask));
-        })
-}, []);
-
-
+      .then(response => {
+        const fetchedTasks = Object.keys(response.data).map(taskId => ({
+          taskId: taskId,
+          newTask: response.data[taskId].newTask
+        }));
+        setTasks(fetchedTasks);
+      })
+      .catch(error => console.error('Görevleri alma hatası:', error));
+  }, [tasks]);
+  
 
 
 const addTask = (newTask) => {
@@ -23,21 +26,7 @@ const addTask = (newTask) => {
     .then(response => {
       setTasks([...tasks, newTask]);
     })
-    .catch(error => console.error('Görev ekleme hatası:', error));
 };
- 
-
-  const deleteItem = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks.splice(index, 1);
-    setTasks(updatedTasks);
-  };
-
-  const updateItem = (index, updatedTask) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index] = updatedTask;
-    setTasks(updatedTasks);
-  };
 
   return (
     <div className="App">
@@ -48,9 +37,8 @@ const addTask = (newTask) => {
           <Tasks
             key={index}
             index={index}
-            task={task}
-            deleteItem={deleteItem}
-            updateItem={updateItem}
+            taskId={task.taskId}
+            task={task.newTask}
           />
         ))}
       </div>

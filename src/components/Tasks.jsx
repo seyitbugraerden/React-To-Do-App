@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function Tasks({ task, index, deleteItem, updateItem }) {
+function Tasks({ task, taskId }) {
   const [isEdit, setIsEdit] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
@@ -9,10 +10,18 @@ function Tasks({ task, index, deleteItem, updateItem }) {
   }, [task]);
 
   const handleUpdate = () => {
-    updateItem(index, editedTask);
+    axios.put(
+      `https://to-do-project-46be6-default-rtdb.firebaseio.com/task/${taskId}.json`,
+      { newTask: editedTask }
+    );
+
     setIsEdit(false);
   };
-
+  const handleDelete = () => {
+    axios.delete(
+      `https://to-do-project-46be6-default-rtdb.firebaseio.com/task/${taskId}.json`
+    );
+  };
   return (
     <>
       {isEdit ? (
@@ -35,7 +44,7 @@ function Tasks({ task, index, deleteItem, updateItem }) {
               className="bi bi-pencil-square"
               onClick={() => setIsEdit(true)}
             ></i>
-            <i className="bi bi-check" onClick={() => deleteItem(index)}></i>
+            <i className="bi bi-check" onClick={handleDelete}></i>
           </div>
         </div>
       )}
