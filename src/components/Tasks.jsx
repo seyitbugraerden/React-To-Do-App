@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Tasks({ task, index, deleteItem, updateItem }) {
   const [isEdit, setIsEdit] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
+
+  useEffect(() => {
+    setEditedTask(task);
+  }, [task]);
 
   const handleUpdate = () => {
     updateItem(index, editedTask);
