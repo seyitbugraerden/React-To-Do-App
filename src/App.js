@@ -27,6 +27,7 @@ const addTask = (newTask) => {
       setTasks([...tasks, newTask]);
     })
 };
+ 
 
   return (
     <div className="App">
@@ -39,6 +40,7 @@ const addTask = (newTask) => {
             index={index}
             taskId={task.taskId}
             task={task.newTask}
+            gorevler={tasks}
           />
         ))}
       </div>

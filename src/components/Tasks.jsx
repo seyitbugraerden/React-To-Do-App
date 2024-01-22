@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Tasks({ task, taskId }) {
+function Tasks({ task, taskId, gorevler }) {
   const [isEdit, setIsEdit] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
@@ -18,10 +18,17 @@ function Tasks({ task, taskId }) {
     setIsEdit(false);
   };
   const handleDelete = () => {
-    axios.delete(
-      `https://to-do-project-46be6-default-rtdb.firebaseio.com/task/${taskId}.json`
-    );
+    axios
+      .delete(
+        `https://to-do-project-46be6-default-rtdb.firebaseio.com/task/${taskId}.json`
+      )
+      .then(() => {
+        if (gorevler.length === 1) {
+          window.location.reload();
+        }
+      });
   };
+
   return (
     <>
       {isEdit ? (
