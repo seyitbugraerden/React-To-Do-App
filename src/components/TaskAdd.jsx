@@ -5,8 +5,10 @@ function TaskAdd({ onAddTask }) {
 
   const addTask = (e) => {
     e.preventDefault();
-    onAddTask(term);
-    setTerm("");
+    if (term.trim() !== "") {
+      onAddTask(term);
+      setTerm("");
+    }
   };
 
   return (
@@ -17,7 +19,9 @@ function TaskAdd({ onAddTask }) {
         value={term}
         onChange={(e) => setTerm(e.target.value)}
       />
-      <button onClick={addTask}>Görev Ekle</button>
+      <button type="submit" disabled={term.trim() === ""}>
+        Görev Ekle
+      </button>
     </form>
   );
 }
