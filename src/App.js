@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import TaskAdd from './components/TaskAdd';
 import Tasks from './components/Tasks';
 import axios from 'axios'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import './App.css';
 
 function App() {
